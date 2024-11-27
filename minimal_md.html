@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<script>
+			let render = (txt) => {
+				lines = txt.split('\n')
+				console.log(lines)
+				console.log(lines.length)
+				content = ''
+				for(let x = 0; x != lines.length; x++ ) {
+					line = lines[x].trim()
+					if (line.startsWith('# ')) {
+						content += '<h1>' + line.substring(2,line.length) + '</h1>'
+					}
+					else if ( line.startsWith('## ')) {
+						content += '<h2>' + line.substring(3,line.length) + '</h2>'
+					}
+					else {
+						content += '<p>' + line + '</p>'
+					}
+					document.body.innerHTML = content
+				}
+				console.log(content)
+			}
+
+			window.onload = () => {
+				fetch('./minimal_md.txt').then((res)=>{
+					res.text().then((txt) => {
+						render(txt)
+					})
+				})
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
